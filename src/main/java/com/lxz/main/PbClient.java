@@ -1,12 +1,13 @@
 package com.lxz.main;
 
-import io.netty.channel.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.util.concurrent.RateLimiter;
 import com.lxz.protobuf.MessageRequest;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
@@ -32,13 +33,10 @@ public class PbClient {
     private static final String HOST = "127.0.0.1";
 
     public static void main(String[] args) throws Exception {
-        // ExecutorService service = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-
-        sendMessageNetty();
-
+        sendMessageNetty(PORT);
     }
 
-    private static void sendMessageNetty() {
+    private static void sendMessageNetty(final int port) {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
         try {
@@ -63,30 +61,34 @@ public class PbClient {
 
             // Start the client.
 
-
-            ChannelFuture f = b.connect(HOST, PORT).sync(); // (5)
+            ChannelFuture f = b.connect(HOST, port).sync(); // (5)
             Channel channel = f.channel();
 
-            for (int i = 0; i < 1000000; i++) {
-                MessageRequest.Message message  = MessageRequest.Message.newBuilder().setType(MessageRequest.Message.Type.FOO)
-                            .setFoo(MessageRequest.Foo.newBuilder().setId(i).setName("foo").build()).build();
+            // ExecutorService service = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 10);
+            RateLimiter limiter = RateLimiter.create(10);
 
-                MessageRequest.Message message1  = MessageRequest.Message.newBuilder().setType(MessageRequest.Message.Type.BAR)
-                            .setBar(MessageRequest.Bar.newBuilder().setId(i).setName("bar").build()).build();
+            for (int i = 0; i < 500000; i++) {
 
-                MessageRequest.Message message2  = MessageRequest.Message.newBuilder().setType(MessageRequest.Message.Type.BAZ)
-                            .setBaz(MessageRequest.Baz.newBuilder().setId(i).setName("baz").build()).build();
+                limiter.acquire();
+                MessageRequest.Message message = MessageRequest.Message.newBuilder()
+                        .setType(MessageRequest.Message.Type.FOO)
+                        .setFoo(MessageRequest.Foo.newBuilder().setId(i).setName("foo").build()).build();
+
+                MessageRequest.Message message1 = MessageRequest.Message.newBuilder()
+                        .setType(MessageRequest.Message.Type.BAR)
+                        .setBar(MessageRequest.Bar.newBuilder().setId(i).setName("bar").build()).build();
+
+                MessageRequest.Message message2 = MessageRequest.Message.newBuilder()
+                        .setType(MessageRequest.Message.Type.BAZ)
+                        .setBaz(MessageRequest.Baz.newBuilder().setId(i).setName("baz").build()).build();
 
                 channel.write(message);
                 channel.write(message1);
                 channel.write(message2);
 
-                if(i % 10 == 0) {
-                    channel.flush();
-                }
-            }
+                channel.flush();
 
-            channel.flush();
+            }
 
             // Wait until the connection is closed.
             channel.closeFuture().sync();

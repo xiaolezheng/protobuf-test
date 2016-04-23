@@ -13,6 +13,10 @@
         </encoder>
     </appender>
 
+    <logger name="io.netty" level="debug" additivity="false">
+        <appender-ref ref="console"/>
+    </logger>
+
     <logger name="com.lxz" level="debug" additivity="false">
         <appender-ref ref="console"/>
     </logger>

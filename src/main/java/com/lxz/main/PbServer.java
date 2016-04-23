@@ -1,5 +1,7 @@
 package com.lxz.main;
 
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,13 +32,13 @@ public class PbServer {
     private static final int PORT = 9090;
 
     public static void main(String[] args) {
-        EventLoopGroup bossGroup = new NioEventLoopGroup(5); // (1)
-        EventLoopGroup workerGroup = new NioEventLoopGroup(5);
+        EventLoopGroup bossGroup = new NioEventLoopGroup(); // (1)
+        EventLoopGroup workerGroup = new NioEventLoopGroup();
 
         try {
-
             ServerBootstrap bootstrap = new ServerBootstrap(); // (2)
             bootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
+                    .handler(new LoggingHandler(LogLevel.DEBUG))
                     .childHandler(new ChannelInitializer<SocketChannel>() { // (4)
                         @Override
                         public void initChannel(SocketChannel ch) throws Exception {
@@ -54,14 +56,14 @@ public class PbServer {
                     .childOption(ChannelOption.SO_KEEPALIVE, true); // (6)
 
             // Bind and start to accept incoming connections.
-            ChannelFuture f = bootstrap.bind(PORT).sync(); // (7)
+            ChannelFuture f1 = bootstrap.bind(PORT).sync(); // (7)
 
             logger.info("protobuf server start ......");
 
             // Wait until the server socket is closed.
             // In this example, this does not happen, but you can do that to gracefully
             // shut down your server.
-            f.channel().closeFuture().sync();
+            f1.channel().closeFuture().sync();
 
         } catch (Exception e) {
             logger.error("", e);
