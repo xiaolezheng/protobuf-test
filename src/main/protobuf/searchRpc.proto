@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option java_package = "com.lxz.protobuf.service";
+option java_outer_classname = "SearchIService";
+
+option java_generic_services = true;
+
+
+import "searchModel.proto";
+
+service SearchService {
+    rpc Search (SearchRequest) returns (SearchResponse);
+}

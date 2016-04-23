@@ -13,32 +13,20 @@ public final class AddressBookProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>required string name = 1;</code>
-     */
-    boolean hasName();
-    /**
-     * <code>required string name = 1;</code>
+     * <code>optional string name = 1;</code>
      */
     java.lang.String getName();
     /**
-     * <code>required string name = 1;</code>
+     * <code>optional string name = 1;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
 
     /**
-     * <code>required int32 id = 2;</code>
-     */
-    boolean hasId();
-    /**
-     * <code>required int32 id = 2;</code>
+     * <code>optional int32 id = 2;</code>
      */
     int getId();
 
-    /**
-     * <code>optional string email = 3;</code>
-     */
-    boolean hasEmail();
     /**
      * <code>optional string email = 3;</code>
      */
@@ -94,15 +82,13 @@ public final class AddressBookProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return this.unknownFields;
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private Person(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
       this();
       int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -112,27 +98,26 @@ public final class AddressBookProtos {
               done = true;
               break;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+              if (!input.skipField(tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000001;
-              name_ = bs;
+              java.lang.String s = input.readStringRequireUtf8();
+
+              name_ = s;
               break;
             }
             case 16: {
-              bitField0_ |= 0x00000002;
+
               id_ = input.readInt32();
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000004;
-              email_ = bs;
+              java.lang.String s = input.readStringRequireUtf8();
+
+              email_ = s;
               break;
             }
             case 34: {
@@ -155,7 +140,6 @@ public final class AddressBookProtos {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           phone_ = java.util.Collections.unmodifiableList(phone_);
         }
-        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -188,6 +172,7 @@ public final class AddressBookProtos {
        * <code>WORK = 2;</code>
        */
       WORK(2, 2),
+      UNRECOGNIZED(-1, -1),
       ;
 
       /**
@@ -205,6 +190,10 @@ public final class AddressBookProtos {
 
 
       public final int getNumber() {
+        if (index == -1) {
+          throw new java.lang.IllegalArgumentException(
+              "Can't get the number of an unknown enum value.");
+        }
         return value;
       }
 
@@ -250,6 +239,9 @@ public final class AddressBookProtos {
           throw new java.lang.IllegalArgumentException(
             "EnumValueDescriptor is not for this type.");
         }
+        if (desc.getIndex() == -1) {
+          return UNRECOGNIZED;
+        }
         return VALUES[desc.getIndex()];
       }
 
@@ -269,25 +261,21 @@ public final class AddressBookProtos {
         com.google.protobuf.MessageOrBuilder {
 
       /**
-       * <code>required string number = 1;</code>
-       */
-      boolean hasNumber();
-      /**
-       * <code>required string number = 1;</code>
+       * <code>optional string number = 1;</code>
        */
       java.lang.String getNumber();
       /**
-       * <code>required string number = 1;</code>
+       * <code>optional string number = 1;</code>
        */
       com.google.protobuf.ByteString
           getNumberBytes();
 
       /**
-       * <code>optional .Person.PhoneType type = 2 [default = HOME];</code>
+       * <code>optional .Person.PhoneType type = 2;</code>
        */
-      boolean hasType();
+      int getTypeValue();
       /**
-       * <code>optional .Person.PhoneType type = 2 [default = HOME];</code>
+       * <code>optional .Person.PhoneType type = 2;</code>
        */
       com.lxz.protobuf.AddressBookProtos.Person.PhoneType getType();
     }
@@ -304,21 +292,19 @@ public final class AddressBookProtos {
       }
       private PhoneNumber() {
         number_ = "";
-        type_ = 1;
+        type_ = 0;
       }
 
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return this.unknownFields;
+        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
       }
       private PhoneNumber(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
         this();
         int mutable_bitField0_ = 0;
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -328,27 +314,21 @@ public final class AddressBookProtos {
                 done = true;
                 break;
               default: {
-                if (!parseUnknownField(input, unknownFields,
-                                       extensionRegistry, tag)) {
+                if (!input.skipField(tag)) {
                   done = true;
                 }
                 break;
               }
               case 10: {
-                com.google.protobuf.ByteString bs = input.readBytes();
-                bitField0_ |= 0x00000001;
-                number_ = bs;
+                java.lang.String s = input.readStringRequireUtf8();
+
+                number_ = s;
                 break;
               }
               case 16: {
                 int rawValue = input.readEnum();
-                com.lxz.protobuf.AddressBookProtos.Person.PhoneType value = com.lxz.protobuf.AddressBookProtos.Person.PhoneType.valueOf(rawValue);
-                if (value == null) {
-                  unknownFields.mergeVarintField(2, rawValue);
-                } else {
-                  bitField0_ |= 0x00000002;
-                  type_ = rawValue;
-                }
+
+                type_ = rawValue;
                 break;
               }
             }
@@ -360,7 +340,6 @@ public final class AddressBookProtos {
               new com.google.protobuf.InvalidProtocolBufferException(
                   e.getMessage()).setUnfinishedMessage(this));
         } finally {
-          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -376,17 +355,10 @@ public final class AddressBookProtos {
                 com.lxz.protobuf.AddressBookProtos.Person.PhoneNumber.class, com.lxz.protobuf.AddressBookProtos.Person.PhoneNumber.Builder.class);
       }
 
-      private int bitField0_;
       public static final int NUMBER_FIELD_NUMBER = 1;
       private volatile java.lang.Object number_;
       /**
-       * <code>required string number = 1;</code>
-       */
-      public boolean hasNumber() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required string number = 1;</code>
+       * <code>optional string number = 1;</code>
        */
       public java.lang.String getNumber() {
         java.lang.Object ref = number_;
@@ -396,14 +368,12 @@ public final class AddressBookProtos {
           com.google.protobuf.ByteString bs = 
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            number_ = s;
-          }
+          number_ = s;
           return s;
         }
       }
       /**
-       * <code>required string number = 1;</code>
+       * <code>optional string number = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNumberBytes() {
@@ -422,17 +392,17 @@ public final class AddressBookProtos {
       public static final int TYPE_FIELD_NUMBER = 2;
       private int type_;
       /**
-       * <code>optional .Person.PhoneType type = 2 [default = HOME];</code>
+       * <code>optional .Person.PhoneType type = 2;</code>
        */
-      public boolean hasType() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+      public int getTypeValue() {
+        return type_;
       }
       /**
-       * <code>optional .Person.PhoneType type = 2 [default = HOME];</code>
+       * <code>optional .Person.PhoneType type = 2;</code>
        */
       public com.lxz.protobuf.AddressBookProtos.Person.PhoneType getType() {
         com.lxz.protobuf.AddressBookProtos.Person.PhoneType result = com.lxz.protobuf.AddressBookProtos.Person.PhoneType.valueOf(type_);
-        return result == null ? com.lxz.protobuf.AddressBookProtos.Person.PhoneType.HOME : result;
+        return result == null ? com.lxz.protobuf.AddressBookProtos.Person.PhoneType.UNRECOGNIZED : result;
       }
 
       private byte memoizedIsInitialized = -1;
@@ -441,23 +411,18 @@ public final class AddressBookProtos {
         if (isInitialized == 1) return true;
         if (isInitialized == 0) return false;
 
-        if (!hasNumber()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
         memoizedIsInitialized = 1;
         return true;
       }
 
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        if (!getNumberBytes().isEmpty()) {
           com.google.protobuf.GeneratedMessage.writeString(output, 1, number_);
         }
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (type_ != com.lxz.protobuf.AddressBookProtos.Person.PhoneType.MOBILE.getNumber()) {
           output.writeEnum(2, type_);
         }
-        unknownFields.writeTo(output);
       }
 
       public int getSerializedSize() {
@@ -465,14 +430,13 @@ public final class AddressBookProtos {
         if (size != -1) return size;
 
         size = 0;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        if (!getNumberBytes().isEmpty()) {
           size += com.google.protobuf.GeneratedMessage.computeStringSize(1, number_);
         }
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (type_ != com.lxz.protobuf.AddressBookProtos.Person.PhoneType.MOBILE.getNumber()) {
           size += com.google.protobuf.CodedOutputStream
             .computeEnumSize(2, type_);
         }
-        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
@@ -585,9 +549,9 @@ public final class AddressBookProtos {
         public Builder clear() {
           super.clear();
           number_ = "";
-          bitField0_ = (bitField0_ & ~0x00000001);
-          type_ = 1;
-          bitField0_ = (bitField0_ & ~0x00000002);
+
+          type_ = 0;
+
           return this;
         }
 
@@ -610,17 +574,8 @@ public final class AddressBookProtos {
 
         public com.lxz.protobuf.AddressBookProtos.Person.PhoneNumber buildPartial() {
           com.lxz.protobuf.AddressBookProtos.Person.PhoneNumber result = new com.lxz.protobuf.AddressBookProtos.Person.PhoneNumber(this);
-          int from_bitField0_ = bitField0_;
-          int to_bitField0_ = 0;
-          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-            to_bitField0_ |= 0x00000001;
-          }
           result.number_ = number_;
-          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-            to_bitField0_ |= 0x00000002;
-          }
           result.type_ = type_;
-          result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
         }
@@ -636,23 +591,18 @@ public final class AddressBookProtos {
 
         public Builder mergeFrom(com.lxz.protobuf.AddressBookProtos.Person.PhoneNumber other) {
           if (other == com.lxz.protobuf.AddressBookProtos.Person.PhoneNumber.getDefaultInstance()) return this;
-          if (other.hasNumber()) {
-            bitField0_ |= 0x00000001;
+          if (!other.getNumber().isEmpty()) {
             number_ = other.number_;
             onChanged();
           }
-          if (other.hasType()) {
-            setType(other.getType());
+          if (other.type_ != 0) {
+            setTypeValue(other.getTypeValue());
           }
-          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
 
         public final boolean isInitialized() {
-          if (!hasNumber()) {
-            return false;
-          }
           return true;
         }
 
@@ -673,17 +623,10 @@ public final class AddressBookProtos {
           }
           return this;
         }
-        private int bitField0_;
 
         private java.lang.Object number_ = "";
         /**
-         * <code>required string number = 1;</code>
-         */
-        public boolean hasNumber() {
-          return ((bitField0_ & 0x00000001) == 0x00000001);
-        }
-        /**
-         * <code>required string number = 1;</code>
+         * <code>optional string number = 1;</code>
          */
         public java.lang.String getNumber() {
           java.lang.Object ref = number_;
@@ -691,16 +634,14 @@ public final class AddressBookProtos {
             com.google.protobuf.ByteString bs =
                 (com.google.protobuf.ByteString) ref;
             java.lang.String s = bs.toStringUtf8();
-            if (bs.isValidUtf8()) {
-              number_ = s;
-            }
+            number_ = s;
             return s;
           } else {
             return (java.lang.String) ref;
           }
         }
         /**
-         * <code>required string number = 1;</code>
+         * <code>optional string number = 1;</code>
          */
         public com.google.protobuf.ByteString
             getNumberBytes() {
@@ -716,76 +657,95 @@ public final class AddressBookProtos {
           }
         }
         /**
-         * <code>required string number = 1;</code>
+         * <code>optional string number = 1;</code>
          */
         public Builder setNumber(
             java.lang.String value) {
           if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000001;
+  
           number_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>required string number = 1;</code>
+         * <code>optional string number = 1;</code>
          */
         public Builder clearNumber() {
-          bitField0_ = (bitField0_ & ~0x00000001);
+          
           number_ = getDefaultInstance().getNumber();
           onChanged();
           return this;
         }
         /**
-         * <code>required string number = 1;</code>
+         * <code>optional string number = 1;</code>
          */
         public Builder setNumberBytes(
             com.google.protobuf.ByteString value) {
           if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000001;
+  checkByteStringIsUtf8(value);
+          
           number_ = value;
           onChanged();
           return this;
         }
 
-        private int type_ = 1;
+        private int type_ = 0;
         /**
-         * <code>optional .Person.PhoneType type = 2 [default = HOME];</code>
+         * <code>optional .Person.PhoneType type = 2;</code>
          */
-        public boolean hasType() {
-          return ((bitField0_ & 0x00000002) == 0x00000002);
+        public int getTypeValue() {
+          return type_;
         }
         /**
-         * <code>optional .Person.PhoneType type = 2 [default = HOME];</code>
+         * <code>optional .Person.PhoneType type = 2;</code>
+         */
+        public Builder setTypeValue(int value) {
+          type_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional .Person.PhoneType type = 2;</code>
          */
         public com.lxz.protobuf.AddressBookProtos.Person.PhoneType getType() {
           com.lxz.protobuf.AddressBookProtos.Person.PhoneType result = com.lxz.protobuf.AddressBookProtos.Person.PhoneType.valueOf(type_);
-          return result == null ? com.lxz.protobuf.AddressBookProtos.Person.PhoneType.HOME : result;
+          return result == null ? com.lxz.protobuf.AddressBookProtos.Person.PhoneType.UNRECOGNIZED : result;
         }
         /**
-         * <code>optional .Person.PhoneType type = 2 [default = HOME];</code>
+         * <code>optional .Person.PhoneType type = 2;</code>
          */
         public Builder setType(com.lxz.protobuf.AddressBookProtos.Person.PhoneType value) {
           if (value == null) {
             throw new NullPointerException();
           }
-          bitField0_ |= 0x00000002;
+          
           type_ = value.getNumber();
           onChanged();
           return this;
         }
         /**
-         * <code>optional .Person.PhoneType type = 2 [default = HOME];</code>
+         * <code>optional .Person.PhoneType type = 2;</code>
          */
         public Builder clearType() {
-          bitField0_ = (bitField0_ & ~0x00000002);
-          type_ = 1;
+          
+          type_ = 0;
           onChanged();
           return this;
         }
+        public final Builder setUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return this;
+        }
+
+        public final Builder mergeUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return this;
+        }
+
 
         // @@protoc_insertion_point(builder_scope:Person.PhoneNumber)
       }
@@ -800,7 +760,7 @@ public final class AddressBookProtos {
         return DEFAULT_INSTANCE;
       }
 
-      @java.lang.Deprecated public static final com.google.protobuf.Parser<PhoneNumber>
+      private static final com.google.protobuf.Parser<PhoneNumber>
           PARSER = new com.google.protobuf.AbstractParser<PhoneNumber>() {
         public PhoneNumber parsePartialFrom(
             com.google.protobuf.CodedInputStream input,
@@ -838,13 +798,7 @@ public final class AddressBookProtos {
     public static final int NAME_FIELD_NUMBER = 1;
     private volatile java.lang.Object name_;
     /**
-     * <code>required string name = 1;</code>
-     */
-    public boolean hasName() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required string name = 1;</code>
+     * <code>optional string name = 1;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -854,14 +808,12 @@ public final class AddressBookProtos {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          name_ = s;
-        }
+        name_ = s;
         return s;
       }
     }
     /**
-     * <code>required string name = 1;</code>
+     * <code>optional string name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -880,13 +832,7 @@ public final class AddressBookProtos {
     public static final int ID_FIELD_NUMBER = 2;
     private int id_;
     /**
-     * <code>required int32 id = 2;</code>
-     */
-    public boolean hasId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required int32 id = 2;</code>
+     * <code>optional int32 id = 2;</code>
      */
     public int getId() {
       return id_;
@@ -894,12 +840,6 @@ public final class AddressBookProtos {
 
     public static final int EMAIL_FIELD_NUMBER = 3;
     private volatile java.lang.Object email_;
-    /**
-     * <code>optional string email = 3;</code>
-     */
-    public boolean hasEmail() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
     /**
      * <code>optional string email = 3;</code>
      */
@@ -911,9 +851,7 @@ public final class AddressBookProtos {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          email_ = s;
-        }
+        email_ = s;
         return s;
       }
     }
@@ -975,39 +913,24 @@ public final class AddressBookProtos {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (!hasName()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      for (int i = 0; i < getPhoneCount(); i++) {
-        if (!getPhone(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       memoizedIsInitialized = 1;
       return true;
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (!getNameBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessage.writeString(output, 1, name_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (id_ != 0) {
         output.writeInt32(2, id_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (!getEmailBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessage.writeString(output, 3, email_);
       }
       for (int i = 0; i < phone_.size(); i++) {
         output.writeMessage(4, phone_.get(i));
       }
-      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1015,21 +938,20 @@ public final class AddressBookProtos {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (!getNameBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessage.computeStringSize(1, name_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (id_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, id_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (!getEmailBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessage.computeStringSize(3, email_);
       }
       for (int i = 0; i < phone_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, phone_.get(i));
       }
-      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -1143,11 +1065,11 @@ public final class AddressBookProtos {
       public Builder clear() {
         super.clear();
         name_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
+
         id_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
+
         email_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
+
         if (phoneBuilder_ == null) {
           phone_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000008);
@@ -1178,17 +1100,8 @@ public final class AddressBookProtos {
         com.lxz.protobuf.AddressBookProtos.Person result = new com.lxz.protobuf.AddressBookProtos.Person(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
         result.name_ = name_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
         result.id_ = id_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
         result.email_ = email_;
         if (phoneBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008)) {
@@ -1215,16 +1128,14 @@ public final class AddressBookProtos {
 
       public Builder mergeFrom(com.lxz.protobuf.AddressBookProtos.Person other) {
         if (other == com.lxz.protobuf.AddressBookProtos.Person.getDefaultInstance()) return this;
-        if (other.hasName()) {
-          bitField0_ |= 0x00000001;
+        if (!other.getName().isEmpty()) {
           name_ = other.name_;
           onChanged();
         }
-        if (other.hasId()) {
+        if (other.getId() != 0) {
           setId(other.getId());
         }
-        if (other.hasEmail()) {
-          bitField0_ |= 0x00000004;
+        if (!other.getEmail().isEmpty()) {
           email_ = other.email_;
           onChanged();
         }
@@ -1254,23 +1165,11 @@ public final class AddressBookProtos {
             }
           }
         }
-        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
       public final boolean isInitialized() {
-        if (!hasName()) {
-          return false;
-        }
-        if (!hasId()) {
-          return false;
-        }
-        for (int i = 0; i < getPhoneCount(); i++) {
-          if (!getPhone(i).isInitialized()) {
-            return false;
-          }
-        }
         return true;
       }
 
@@ -1295,13 +1194,7 @@ public final class AddressBookProtos {
 
       private java.lang.Object name_ = "";
       /**
-       * <code>required string name = 1;</code>
-       */
-      public boolean hasName() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required string name = 1;</code>
+       * <code>optional string name = 1;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -1309,16 +1202,14 @@ public final class AddressBookProtos {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            name_ = s;
-          }
+          name_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>required string name = 1;</code>
+       * <code>optional string name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -1334,36 +1225,37 @@ public final class AddressBookProtos {
         }
       }
       /**
-       * <code>required string name = 1;</code>
+       * <code>optional string name = 1;</code>
        */
       public Builder setName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000001;
+  
         name_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string name = 1;</code>
+       * <code>optional string name = 1;</code>
        */
       public Builder clearName() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        
         name_ = getDefaultInstance().getName();
         onChanged();
         return this;
       }
       /**
-       * <code>required string name = 1;</code>
+       * <code>optional string name = 1;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000001;
+  checkByteStringIsUtf8(value);
+        
         name_ = value;
         onChanged();
         return this;
@@ -1371,31 +1263,25 @@ public final class AddressBookProtos {
 
       private int id_ ;
       /**
-       * <code>required int32 id = 2;</code>
-       */
-      public boolean hasId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required int32 id = 2;</code>
+       * <code>optional int32 id = 2;</code>
        */
       public int getId() {
         return id_;
       }
       /**
-       * <code>required int32 id = 2;</code>
+       * <code>optional int32 id = 2;</code>
        */
       public Builder setId(int value) {
-        bitField0_ |= 0x00000002;
+        
         id_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 id = 2;</code>
+       * <code>optional int32 id = 2;</code>
        */
       public Builder clearId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        
         id_ = 0;
         onChanged();
         return this;
@@ -1405,21 +1291,13 @@ public final class AddressBookProtos {
       /**
        * <code>optional string email = 3;</code>
        */
-      public boolean hasEmail() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional string email = 3;</code>
-       */
       public java.lang.String getEmail() {
         java.lang.Object ref = email_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            email_ = s;
-          }
+          email_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1449,7 +1327,7 @@ public final class AddressBookProtos {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  
         email_ = value;
         onChanged();
         return this;
@@ -1458,7 +1336,7 @@ public final class AddressBookProtos {
        * <code>optional string email = 3;</code>
        */
       public Builder clearEmail() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        
         email_ = getDefaultInstance().getEmail();
         onChanged();
         return this;
@@ -1471,7 +1349,8 @@ public final class AddressBookProtos {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  checkByteStringIsUtf8(value);
+        
         email_ = value;
         onChanged();
         return this;
@@ -1716,6 +1595,16 @@ public final class AddressBookProtos {
         }
         return phoneBuilder_;
       }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
 
       // @@protoc_insertion_point(builder_scope:Person)
     }
@@ -1730,7 +1619,7 @@ public final class AddressBookProtos {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<Person>
+    private static final com.google.protobuf.Parser<Person>
         PARSER = new com.google.protobuf.AbstractParser<Person>() {
       public Person parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
@@ -1810,15 +1699,13 @@ public final class AddressBookProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return this.unknownFields;
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private AddressBook(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
       this();
       int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1828,8 +1715,7 @@ public final class AddressBookProtos {
               done = true;
               break;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+              if (!input.skipField(tag)) {
                 done = true;
               }
               break;
@@ -1854,7 +1740,6 @@ public final class AddressBookProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           person_ = java.util.Collections.unmodifiableList(person_);
         }
-        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1911,12 +1796,6 @@ public final class AddressBookProtos {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      for (int i = 0; i < getPersonCount(); i++) {
-        if (!getPerson(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -1926,7 +1805,6 @@ public final class AddressBookProtos {
       for (int i = 0; i < person_.size(); i++) {
         output.writeMessage(1, person_.get(i));
       }
-      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1938,7 +1816,6 @@ public final class AddressBookProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, person_.get(i));
       }
-      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -2130,17 +2007,11 @@ public final class AddressBookProtos {
             }
           }
         }
-        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
       public final boolean isInitialized() {
-        for (int i = 0; i < getPersonCount(); i++) {
-          if (!getPerson(i).isInitialized()) {
-            return false;
-          }
-        }
         return true;
       }
 
@@ -2402,6 +2273,16 @@ public final class AddressBookProtos {
         }
         return personBuilder_;
       }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
 
       // @@protoc_insertion_point(builder_scope:AddressBook)
     }
@@ -2416,7 +2297,7 @@ public final class AddressBookProtos {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<AddressBook>
+    private static final com.google.protobuf.Parser<AddressBook>
         PARSER = new com.google.protobuf.AbstractParser<AddressBook>() {
       public AddressBook parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
@@ -2474,14 +2355,14 @@ public final class AddressBookProtos {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\021addressbook.proto\"\310\001\n\006Person\022\014\n\004name\030\001" +
-      " \002(\t\022\n\n\002id\030\002 \002(\005\022\r\n\005email\030\003 \001(\t\022\"\n\005phone" +
-      "\030\004 \003(\0132\023.Person.PhoneNumber\032D\n\013PhoneNumb" +
-      "er\022\016\n\006number\030\001 \002(\t\022%\n\004type\030\002 \001(\0162\021.Perso" +
-      "n.PhoneType:\004HOME\"+\n\tPhoneType\022\n\n\006MOBILE" +
-      "\020\000\022\010\n\004HOME\020\001\022\010\n\004WORK\020\002\"&\n\013AddressBook\022\027\n" +
-      "\006person\030\001 \003(\0132\007.PersonB%\n\020com.lxz.protob" +
-      "ufB\021AddressBookProtos"
+      "\n\021addressbook.proto\"\302\001\n\006Person\022\014\n\004name\030\001" +
+      " \001(\t\022\n\n\002id\030\002 \001(\005\022\r\n\005email\030\003 \001(\t\022\"\n\005phone" +
+      "\030\004 \003(\0132\023.Person.PhoneNumber\032>\n\013PhoneNumb" +
+      "er\022\016\n\006number\030\001 \001(\t\022\037\n\004type\030\002 \001(\0162\021.Perso" +
+      "n.PhoneType\"+\n\tPhoneType\022\n\n\006MOBILE\020\000\022\010\n\004" +
+      "HOME\020\001\022\010\n\004WORK\020\002\"&\n\013AddressBook\022\027\n\006perso" +
+      "n\030\001 \003(\0132\007.PersonB%\n\020com.lxz.protobufB\021Ad" +
+      "dressBookProtosb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

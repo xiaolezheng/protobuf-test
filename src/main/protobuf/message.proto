@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option java_package = "com.lxz.protobuf";
+option java_outer_classname = "MessageRequest";
+
+message Message {
+    enum Type { FOO = 0; BAR = 1; BAZ = 2; RESPONSE = 3;}
+
+    // Identifies which field is filled in.
+    Type type = 1;
+
+    // One of the following will be filled in.
+    Foo foo = 2;
+    Bar bar = 3;
+    Baz baz = 4;
+    Response response = 5;
+}
+
+message Foo {
+    int32 id = 1;
+    string name = 2;
+}
+
+message Bar {
+    int32 id = 1;
+    string name = 2;
+}
+
+message Baz {
+    int32 id =1;
+    string name = 2;
+}
+
+message Response {
+    enum Status {SUCCESS = 0; FAIL = 1; EXCEPTION = 2;}
+    Status status = 1;
+    string msg = 2;
+    int32 msgId = 3;
+}
