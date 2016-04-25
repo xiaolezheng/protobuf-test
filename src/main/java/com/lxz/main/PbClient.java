@@ -65,7 +65,7 @@ public class PbClient {
             Channel channel = f.channel();
 
             // ExecutorService service = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 10);
-            RateLimiter limiter = RateLimiter.create(10);
+            RateLimiter limiter = RateLimiter.create(20);
 
             for (int i = 0; i < 500000; i++) {
 
